@@ -10,7 +10,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping(value="/categorias")
-public class CategoriaController {
+public class CategoriaResource {
 
     @RequestMapping(method = RequestMethod.GET)
     public List<Categoria> listar() {
