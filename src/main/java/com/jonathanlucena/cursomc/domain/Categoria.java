@@ -1,7 +1,5 @@
 package com.jonathanlucena.cursomc.domain;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +13,6 @@ public class Categoria {
     private Integer id;
     private String nome;
 
-    @JsonManagedReference
     @ManyToMany(mappedBy = "categorias")
     private List<Produto> produtos = new ArrayList<>();
 
