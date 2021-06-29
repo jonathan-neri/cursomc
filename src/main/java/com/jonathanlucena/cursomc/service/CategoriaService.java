@@ -2,8 +2,11 @@ package com.jonathanlucena.cursomc.service;
 
 import com.jonathanlucena.cursomc.domain.Categoria;
 import com.jonathanlucena.cursomc.repositories.CategoriaRepository;
+import com.jonathanlucena.cursomc.service.exceptions.DataIntegrityException;
 import com.jonathanlucena.cursomc.service.exceptions.ObjectNotFoundException;
+import net.bytebuddy.implementation.bytecode.Throw;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -29,4 +32,15 @@ public class CategoriaService {
         find(obj.getId());
         return repo.save(obj);
     }
+
+    public void delete(Integer id){
+        find(id);
+        try{
+        repo.deleteById(id);
+    }
+        catch (DataIntegrityViolationException e) {
+            throw new DataIntegrityException("Não é possível excluir uma categoria que possuí produtos");
+        }
+
+        }
 }
